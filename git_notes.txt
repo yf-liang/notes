@@ -10,10 +10,10 @@ git clone https://github.com/yf-liang/notes
 
 cd notes
 
-# git remote add origin https://github.com/yf-liang/notes.git
+git remote add origin https://github.com/yf-liang/notes.git
 git add .
-git commit -m "upload all"
+git commit -m "update with git notes"
 git config credential.helper store
 git push origin master
 
-
+add more files
