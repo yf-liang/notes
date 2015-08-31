@@ -1,0 +1,150 @@
+# ----------------------------------------------------------------------------
+root@vagrant:~/projects/test_py.dir# python -m SimpleHTTPServer 3000
+Serving HTTP on 0.0.0.0 port 3000 ...
+10.0.2.2 - - [26/Aug/2015 21:58:26] "GET / HTTP/1.1" 200 -
+
+
+http://127.0.0.1:8080/
+
+
+# Vagrantfile
+Vagrant.configure(2) do |config|
+  config.vm.network "forwarded_port", guest: 3000, host: 8080,
+  auto_correct: true
+  
+
+rails server --binding=10.0.2.15
+  
+root@vagrant:~/rails_projects/first_app# ifconfig -a
+docker0   Link encap:Ethernet  HWaddr 56:84:7a:fe:97:99
+          inet addr:172.17.42.1  Bcast:0.0.0.0  Mask:255.255.0.0
+....
+
+eth0      Link encap:Ethernet  HWaddr 08:00:27:88:84:f9
+          inet addr:10.0.2.15  Bcast:10.0.2.255  Mask:255.255.255.0
+  
+
+# ----------------------------------------------------------------------------
+
+vagrant boxes already have guest additions added
+vagrant destroy and vagrant up to return to image state (need to regen cert again).
+may not bother with update (yum or apt-get), as update will be done in docker anyway.
+
+# vagrant up
+    default: Adapter 1: nat
+    default: Adapter 2: bridged
+    
+# ifconfig -a    
+http://192.168.1.70:8000/
+enp0s8: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.1.70  netmask 255.255.255.0  broadcast 192.168.1.255
+
+
+if error,
+==> default: Specific bridge 'Wireless Network Connection' not found. You may be
+ asked to specify
+==> default: which network to bridge to.
+==> default: Available bridged network interfaces:
+==> default: When choosing an interface, it is usually the one that is
+==> default: being used to connect to the internet.
+    default: Which interface should the network bridge to?      default: Which i
+    
+RE-comment: public network entry
+  # config.vm.network "public_network", :bridge => 'Local Area Connection* 3'
+
+
+# ----------------------------------------------------------------------------
+C:\Users\ye-fee\projects>vagrant box list
+box-cutter/centos66 (virtualbox, 2.0.2)
+chef/centos-6.5     (virtualbox, 1.0.0)
+docker              (virtualbox, 0)
+hp-ess/docker       (virtualbox, 1.0.8)
+ubuntu/trusty64     (virtualbox, 14.04)
+
+C:\Users\ye-fee\projects>dir
+ Volume in drive C is OS
+ Volume Serial Number is 209E-30D0
+
+ Directory of C:\Users\ye-fee\projects
+
+2015-08-18  01:10 AM    <DIR>          .
+2015-08-18  01:10 AM    <DIR>          ..
+2015-08-18  12:33 AM    <DIR>          centos_docker    # centos 6
+2015-08-18  01:14 AM    <DIR>          centos_docker2   # docker + centos 7
+2015-08-13  11:57 AM    <DIR>          demo
+2015-08-17  11:57 PM    <DIR>          docker           # docker + ubuntu 14.04
+2015-08-13  11:11 AM    <DIR>          git-test
+2015-08-17  11:27 PM    <DIR>          test-centos66
+2015-08-13  12:57 PM    <DIR>          test-trusty64
+2015-08-13  01:44 PM    <DIR>          test_chef_centos65
+               0 File(s)              0 bytes
+              10 Dir(s)  28,902,789,120 bytes free
+
+cd centos_docker2
+vagrant init hp-ess/docker
+vagrant up
+
+cp .\.vagrant\machines\default\virtualbox\private_key .
+C:\util\putty\PUTTYGEN.EXE 
+    Load (All Files (*.*)): C:\Users\ye-fee\projects\centos_docker\private_key
+    Save private key:       C:\Users\ye-fee\projects\centos_docker\private_key.ppk
+
+putty  Session:  Host: 127.0.0.1  Port: 2222  Saved Sessions: vg_centos_docker
+   Connection/SSH/Auth/Private key file for authentication:
+      C:\Users\ye-fee\projects\centos_docker\private_key.ppk
+   
+passwd                         # change root password
+vi /etc/ssh/sshd_config        # enable root passwd log-in
+   PermitRootLogin yes
+   
+service httpd restart          # or shutdown -r now # reboot
+
+MobaXterm
+    Saved Session: vg_centos_docker 
+        Remote host:127.0.0.1  [x]Specify username: root  Port:2222
+        [ ] Use private key
+
+    root password: r4
+
+# ----------------------------------------------------------------------------
+/drives/c/users/ye-fee/projects
+
+/drives/c/users/ye-fee/.vagrant.d
+[2015-08-13 12:45.40]  /drives/c/users/ye-fee/.vagrant.d
+[ye-fee.yliang-dell] ? ls -l boxes
+total 0
+drwxrwx---    1 ye-fee   UsersGrp         0 Aug 13 00:08 hashicorp-VAGRANTSLASH-precise64
+drwxrwx---    1 ye-fee   UsersGrp         0 Jan  6  2015 ubuntu-VAGRANTSLASH-trusty64
+
+export PATH=/bin:/usr/bin:/drives/c/Windows:/drives/c/Windows/system32:/drives/c/HashiCorp/Vagrant/bin
+export PATH=$PATH:/drives/c/HashiCorp/Vagrant/bin
+
+$ vagrant box add ubuntu/trusty64
+$ vagrant box list
+hashicorp/precise64 (virtualbox, 1.1.0)
+ubuntu/trusty64     (virtualbox, 14.04)
+
+cd ~/projects/
+mkdir test-trusty64
+vagrant init ubuntu/trusty64
+vagrant up
+vagrant destry
+
+vagrant box outdated
+vagrant box update
+vagrant box remove hashicorp/precise64
+
+http://www.vagrantbox.es/
+vagrant box add  docker  https://github.com/jose-lpa/packer-ubuntu_14.04/releases/download/v2.0/ubuntu-14.04.box
+vagrant box add  box-cutter/centos66
+vagrant box add  chef/centos-6.5
+vagrant box add  hp-ess/docker
+vagrant box add  ubuntu/trusty64
+
+vagrantcloud.com
+https://atlas.hashicorp.com/
+
+google search:  vagrant plug-in
+https://github.com/mitchellh/vagrant/wiki/Available-Vagrant-Plugins
+
+

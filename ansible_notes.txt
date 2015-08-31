@@ -1,0 +1,17 @@
+# download get-pip.py : 
+#     click download link from https://pip.pypa.io/en/latest/installing.html
+
+sudo su - 
+python get-pip.py
+root@yeliang-HP-G61-Notebook-PC:~# python ~yeliang/Downloads/*py
+Collecting pip
+
+pip install ansible
+
+install oracle virtualbox-5.0  
+    Ubuntu 14.04 ("Trusty") / 14.10 ("Utopic") / 15.04 ("Vivid")  AMD64
+
+install vagrant 1.7.4
+    Linux (Deb) 64-bit 
+
+
