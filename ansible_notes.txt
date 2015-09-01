@@ -14,4 +14,79 @@ install oracle virtualbox-5.0
 install vagrant 1.7.4
     Linux (Deb) 64-bit 
 
+# ----------------------------------------------------------------------------
 
+root@yeliang-HP-G61-Notebook-PC:~/projects/ubuntu# ssh vagrant@127.0.0.1 -p 2222 -i /root/projects/ubuntu/.vagrant/machines/default/virtualbox/private_key hostname
+vagrant-ubuntu-trusty-64
+
+# ansible/hosts file : NB Must be One line:
+test1  ansible_ssh_host=127.0.0.1  ansible_ssh_port=2222  ansible_ssh_user=vagrant  \
+       ansible_ssh_private_key_file=/root/projects/ubuntu/.vagrant/machines/default/virtualbox/private_key
+
+ansible test1 -i hosts -m ping
+ansible test1 -vvv  -i hosts -m ping
+ansible test1 -vvvv -i hosts -m ping
+
+
+# using config files
+# locations:  ENV var: ANSIBLE_CONFIG
+#             ./ansible.cfg (cwd), ~/.ansible.cfg (home), /etc/ansible/ansible.cfg
+
+[defaults]
+hostfile = hosts
+remote_user = vagrant
+private_key_file = .vagrant/machines/default/virtualbox/private_key
+host_key_checking = False
+
+# ----------------------------------------------------------------------------
+
+# ansible.cfg
+[defaults]
+hostfile = hosts
+remote_user = vagrant
+private_key_file = /root/projects/ubuntu/.vagrant/machines/default/virtualbox/private_key
+host_key_checking = False
+
+# cat hosts
+test1  ansible_ssh_host=127.0.0.1  ansible_ssh_port=2222 
+
+root@yeliang-HP-G61-Notebook-PC:~/projects/ubuntu/test.dir# ansible test1 -m ping
+test1 | success >> {
+    "changed": false, 
+    "ping": "pong"
+}
+
+# ----------------------------------------------------------------------------
+
+# ansible test1 -a hostname
+# ansible test1 -m command -a hostname
+test1 | success | rc=0 >>
+vagrant-ubuntu-trusty-64
+
+# run using sudo
+# ansible test1 -s -a "tail /var/log/syslog"
+
+root@yeliang-HP-G61-Notebook-PC:~/projects/ubuntu/test.dir# ansible test1 -s -m apt -a name=nginxtest1 | success >> {
+    "changed": true, 
+.....
+
+# ansible test1 -s -m service -a name="nginx state=restarted"
+test1 | success >> {
+    "changed": true, 
+    "name": "nginx", 
+    "state": "started"
+}
+
+# ----------------------------------------------------------------------------
+bpl.bc.ca  ansible up and running
+
+
+openssl req -x509 -nodes -days 3650 -newkey rsa:2048 \
+    -subj /CN=localhost \
+    -keyout files/nginx.key -out files/nginx.crt
+
+# ----------------------------------------------------------------------------
+
+# ----------------------------------------------------------------------------
+
+# ----------------------------------------------------------------------------
