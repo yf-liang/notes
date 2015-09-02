@@ -1,3 +1,38 @@
+
+# ----------------------------------------------------------------------------
+####### quote entire command after name tag
+- name: perform some task
+  command: "{{ myapp }} -a foo"
+
+####### single quote entire command, if str contains :
+- name: show a debug message
+  debug: "msg='The debug module will print a message: neat, eh?'"
+
+# ----------------------------------------------------------------------------
+cd test.dir
+root@yeliang-HP-G61-Notebook-PC:~/projects/ubuntu/test.dir# ls
+ansible.cfg  files  hosts  templates  web-notls.yml  web-tls.yml
+
+
+root@yeliang-HP-G61-Notebook-PC:~/projects/ubuntu/test.dir# find . -type f  -exec ls -l {} \;
+-rw-r--r-- 1 root root 231 Aug 31 16:05 ./templates/index.html.j2
+-rw-r--r-- 1 root root 394 Sep  1 13:46 ./templates/nginx.conf.j2
+-rw-r--r-- 1 root root 1094 Aug 31 16:25 ./files/nginx.crt
+-rw-r--r-- 1 root root 1708 Aug 31 16:25 ./files/nginx.key
+-rw-r--r-- 1 root root 276 Aug 31 16:04 ./files/nginx.conf
+-rw-r--r-- 1 root root 129 Aug 31 16:07 ./hosts
+-rw-r--r-- 1 root root 166 Aug 31 14:58 ./ansible.cfg
+-rw-r--r-- 1 root root 613 Aug 31 16:03 ./web-notls.yml
+-rw-r--r-- 1 root root 394 Sep  1 13:52 ./server
+-rwxr--r-- 1 root root 1221 Sep  1 13:54 ./web-tls.yml
+
+
+#!/usr/bin/env ansible-playbook
+
+./web-tls.yml
+
+# ----------------------------------------------------------------------------
+
 # download get-pip.py : 
 #     click download link from https://pip.pypa.io/en/latest/installing.html
 

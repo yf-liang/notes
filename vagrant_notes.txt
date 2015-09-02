@@ -1,3 +1,11 @@
+sudo su - 
+cd projects/ubuntu
+vagrant up
+
+
+ansible host
+
+ansible nodes : vagrant targets
 
 # ----------------------------------------------------------------------------
 bios enable hdw virutalization
@@ -12,6 +20,7 @@ root@yeliang-HP-G61-Notebook-PC:~/projects/ubuntu# ssh vagrant@127.0.0.1 -p 2222
 vagrant-ubuntu-trusty-64
 
 # ----------------------------------------------------------------------------
+
 
 # ----------------------------------------------------------------------------
 root@vagrant:~/projects/test_py.dir# python -m SimpleHTTPServer 3000
