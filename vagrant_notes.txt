@@ -16,8 +16,24 @@ config.vm.provider :virtualbox do |vb|
 end
 
 
-root@yeliang-HP-G61-Notebook-PC:~/projects/ubuntu# ssh vagrant@127.0.0.1 -p 2222 -i /root/projects/ubuntu/.vagrant/machines/default/virtualbox/private_key hostname
-vagrant-ubuntu-trusty-64
+root@yeliang-HP-G61-Notebook-PC:~/projects/ubuntu# ssh vagrant@127.0.0.1 -p 2222 -i /root/projects/ubuntu/.vagrant/machines/default/virtualbox/private_key 
+
+hostname vagrant-ubuntu-trusty-64
+
+
+SSH key (since Vagrant 1.7.0):  
+    .vagrant/machines/[machine name]/[provider]/private_key),
+        (prior to 1.7.0):
+    ~/.vagrant.d/insecure_private_key.
+
+
+# ansible.cfg
+[defaults]
+hostfile = hosts
+remote_user = vagrant
+# private_key_file = /root/projects/ubuntu/.vagrant.d/insecure_private_key
+private_key_file = /root/projects/ubuntu/.vagrant/machines/default/virtualbox/private_key
+host_key_checking = False
 
 # ----------------------------------------------------------------------------
 

@@ -1,5 +1,18 @@
 
 # ----------------------------------------------------------------------------
+root@yeliang-HP-G61-Notebook-PC:~/projects/ubuntu/mezz.dir# pwd
+/root/projects/ubuntu/mezz.dir
+
+root@yeliang-HP-G61-Notebook-PC:~/projects/ubuntu/mezz.dir# cat ansible.cfg
+[defaults]
+hostfile = hosts
+remote_user = vagrant
+# private_key_file = /root/projects/ubuntu/.vagrant.d/insecure_private_key
+private_key_file = /root/projects/ubuntu/.vagrant/machines/default/virtualbox/private_key
+host_key_checking = False
+
+
+# ----------------------------------------------------------------------------
 ####### quote entire command after name tag
 - name: perform some task
   command: "{{ myapp }} -a foo"

@@ -1,0 +1,10 @@
+vagrant@vagrant-ubuntu-trusty-64:~$ apt-cache pkgnames superv
+supervisor
+vagrant@vagrant-ubuntu-trusty-64:~$ apt-cache pkgnames visor
+
+
+root@yeliang-HP-G61-Notebook-PC:~/projects/ubuntu/mezz.dir# ansible-playbook --check my_mezz.yml
+root@yeliang-HP-G61-Notebook-PC:~/projects/ubuntu/mezz.dir# ansible-playbook --list-hosts my_mezz.yml
+root@yeliang-HP-G61-Notebook-PC:~/projects/ubuntu/mezz.dir# ansible-playbook --debug my_mezz.yml
+root@yeliang-HP-G61-Notebook-PC:~/projects/ubuntu/mezz.dir# 
+
