@@ -7,7 +7,7 @@ git config --global user.email "yf.liang@yahoo.ca"
 git clone https://github.com/yf-liang/notes
 cd notes
 
-git config remote.origin.url https://yf.liang:jar@github.com/ye-liang/notes.git
+git config remote.origin.url https://yf.liang@yahoo.ca:jar@github.com/yf-liang/notes.git
 # update notes
 git add .
 git commit -m "update with git notes 20150905"
@@ -15,6 +15,7 @@ git commit -m "update with git notes 20150905"
 git push origin master
 
 
+# git remote rm origin
 root@yeliang-HP-G61-Notebook-PC:~/notes# git checkout master
 root@yeliang-HP-G61-Notebook-PC:~/notes# git pull --rebase origin
 root@yeliang-HP-G61-Notebook-PC:~/notes# git push origin master
