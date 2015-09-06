@@ -15,10 +15,14 @@ git commit -m "update with git notes 20150905"
 git push origin master
 
 # git remote rm origin
+# git config remote.origin.url https://github.com/yf-liang/notes.git
+
 root@yeliang-HP-G61-Notebook-PC:~/notes# git checkout master
 root@yeliang-HP-G61-Notebook-PC:~/notes# git pull --rebase origin
 root@yeliang-HP-G61-Notebook-PC:~/notes# git push origin master
 
+root@yeliang-HP-G61-Notebook-PC:~# cat .git-credentials
+https://yf.liang%40yahoo.ca:jar@github.com
 
 mkdir <newgit>
 cd <newgit>
