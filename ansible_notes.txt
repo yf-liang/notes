@@ -23,6 +23,7 @@ install vagrant 1.7.4
 
 vagrant box add  ubuntu/trusty64
 
+alias cdu="cd ~/projects/ubuntu"
 
 # -----------------------------------------------------------------------------
 root@yeliang-HP-G61-Notebook-PC:~/projects/ubuntu/mezz.dir# pwd
@@ -135,7 +136,7 @@ test1 | success >> {
 # ----------------------------------------------------------------------------
 bpl.bc.ca  ansible up and running
 
-
+mkdir files
 openssl req -x509 -nodes -days 3650 -newkey rsa:2048 \
     -subj /CN=localhost \
     -keyout files/nginx.key -out files/nginx.crt
