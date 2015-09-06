@@ -7,7 +7,7 @@ git config --global user.email "yf.liang@yahoo.ca"
 git clone https://github.com/yf-liang/notes
 cd notes
 
-git config remote.origin.url https://yf.liang:jar@github.com/yf-liang/notes.git
+git config remote.origin.url https://yf-liang:jar@github.com/yf-liang/notes.git
 # update notes
 git add --all .
 git commit -m "update with git notes 20150905"
