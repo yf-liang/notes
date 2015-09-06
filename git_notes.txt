@@ -17,6 +17,8 @@ git push origin master
 # git remote rm origin
 # git config remote.origin.url https://github.com/yf-liang/notes.git
 
+.gitconfig
+
 root@yeliang-HP-G61-Notebook-PC:~/notes# git checkout master
 root@yeliang-HP-G61-Notebook-PC:~/notes# git pull --rebase origin
 root@yeliang-HP-G61-Notebook-PC:~/notes# git push origin master
