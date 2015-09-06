@@ -1,3 +1,11 @@
+
+
+# ~/.profile
+set -o vi
+alias cdu="cd ~/projects/ubuntu"
+
+# ----------------------------------------------------------------------------
+
 vagrant@vagrant-ubuntu-trusty-64:~$ apt-cache pkgnames superv
 supervisor
 vagrant@vagrant-ubuntu-trusty-64:~$ apt-cache pkgnames visor
