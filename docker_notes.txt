@@ -1,0 +1,282 @@
+
+# ----------------------------------------------------------------------------
+
+cd projects/test_docker.dir
+docker run -it --name svr1 <img> bin/bash
+^P^Q
+docker attach svr1
+docker commit svr1 ubuntu-nginx
+docker stop svr1
+docker rm   svr1
+
+docker pull busybox
+docker pull ansible/ubuntu14.04-ansible
+
+# ----------------------------------------------------------------------------
+apt-get update
+apt-get install wget
+wget -qO- https://get.docker.com/ | sh
+
+
++ sh -c docker version
+Client:
+ Version:      1.8.1
+ API version:  1.20
+ Go version:   go1.4.2
+ Git commit:   d12ea79
+ Built:        Thu Aug 13 02:35:49 UTC 2015
+ OS/Arch:      linux/amd64
+
+Server:
+ Version:      1.8.1
+ API version:  1.20
+ Go version:   go1.4.2
+ Git commit:   d12ea79
+ Built:        Thu Aug 13 02:35:49 UTC 2015
+ OS/Arch:      linux/amd64
+
+If you would like to use Docker as a non-root user, you should now consider
+adding your user to the "docker" group with something like:
+
+  sudo usermod -aG docker your-user
+
+Remember that you will have to log out and back in for this to take effect!
+
+# ----------------------------------------------------------------------------
+
+# ----------------------------------------------------------------------------
+
+https://hub.docker.com/_/ruby/
+
+
+$ docker pull rails
+$ docker pull ruby           # 717 MB
+$ docker run -it --rm --name my-running-script -v "$PWD":/usr/src/myapp -w /usr/src/myapp ruby:2.1 ruby your-daemon-or-script.rb
+
+docker run -it --rm --name my-test -v "$PWD":/usr/src/myapp -w /usr/src/myapp ruby:2.1 ruby hello.rb
+
+/root/projects/test_rail.dir
+
+# ----------------------------------------------------------------------------
+# centos docker
+[root@devenv ~]# docker run -it --name test1 ubuntu /bin/bash
+[root@devenv ~]# docker inspect test1
+
+[root@devenv ~]# docker inspect test1 | grep -i ipaddress
+        "IPAddress": "172.17.0.2",
+
+
+# mount local dir (abs path) as container dir:
+[root@devenv ~]# docker run -it --name test1 -v /root/share_pub:/share_pub ubuntu-py bash
+root@d53222a81345:/# cd /share_pub
+root@d53222a81345:/share_pub# ls -l
+total 4
+-rw-r--r--. 1 root root 23 Aug 21 20:10 index.html
+
+# ----------------------------------------------------------------------------
+
+# docker commit -m "coment" -a "author" <container id/name>  <new img name>
+# docker commit -m "python + tools" -a "yeliang" test1 ubuntu-py 
+apt-get update
+apt-get install -y tar git curl wget dialog net-tools build-essential
+apt-get install -y python python-dev python-distribute python-pip
+# docker run -it --name test1 ubuntu-py /bin/bash
+
+# ----------------------------------------------------------------------------
+
+root@vagrant:~# curl ifconfig.co
+75.155.171.231  # addr of telus router? SE567
+python -m SimpleHTTPServer 8000
+
+# ----------------------------------------------------------------------------
+root@09171f43e4e3:/# apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 36A1D7869245C8950F966E92D8576A8BA88D21E9
+Executing: gpg --ignore-time-conflict --no-options --no-default-keyring --homedir /tmp/tmp.XGVr2o8N1c --no-auto-check-trustdb --trust-model always --keyring /etc/apt/trusted.gpg --primary-keyring /etc/apt/trusted.gpg --keyserver keyserver.ubuntu.com --recv-keys 36A1D7869245C8950F966E92D8576A8BA88D21E9
+gpg: requesting key A88D21E9 from hkp server keyserver.ubuntu.com
+gpg: key A88D21E9: public key "Docker Release Tool (releasedocker) <docker@dotcloud.com>" imported
+gpg: Total number processed: 1
+gpg:               imported: 1  (RSA: 1)
+
+# ----------------------------------------------------------------------------
+
+https://github.com/wsargent/docker-cheat-sheet
+http://blog.flux7.com/blogs/docker/docker-tutorial-series-part-1-an-introduction
+http://stackoverflow.com/questions/23497855/unable-to-connect-to-vagrant-private-network-from-host
+
+cd C:\Users\ye-fee\projects\centos_docker
+vagrant up
+mobaXterm
+
+# ----------------------------------------------------------------------------
+docker run -it --name svr1a ubuntu-nginx /bin/bash
+
+apt-get install python
+cd /projects ; vi index.html
+python -m SimpleHTTPServer 8000
+
+docker run -it --name svr1 ubuntu-nginx2 /bin/bash
+docker commit svr1a  <id>
+docker run -d --name svr1b ubuntu-nginx2 /bin/bash
+docker run -d --name svr1a -p 8081:8000 ubuntu-nginx2 /bin/bash
+
+docker build --rm -t svr1a2  .
+docker run -d --name svr1a2a svr1a2 
+# ----------------------------------------------------------------------------
+FROM ubuntu-py
+MAINTAINER yeliang
+
+# WORKDIR /projects/test_py.dir
+RUN curl ifconfig.co
+RUN echo "hello world 42 py!!" > index.html
+EXPOSE 8000
+ENTRYPOINT python -m SimpleHTTPServer 8000
+
+docker build --rm -t test1a  .
+docker run -d --name test1a test1a 
+
+
+# docker run -it --name test1 ubuntu-py /bin/bash
+
+root@67cf06421f9b:/# ifconfig -a
+eth0      Link encap:Ethernet  HWaddr 02:42:ac:11:00:02
+          inet addr:172.17.0.2  Bcast:0.0.0.0  Mask:255.255.0.0
+....
+
+lo        Link encap:Local Loopback
+          inet addr:127.0.0.1  Mask:255.0.0.0
+
+root@67cf06421f9b:/# ifconfig eth0 | grep "inet addr" | awk '{print $2}' | awk -F: '{print $2}'
+172.17.0.2
+
+root@vagrant:~/projects/test_http.dir# docker inspect test1 | grep IPAddress | awk -F\" '{print $4}'
+172.17.0.2
+root@vagrant:~/projects/test_http.dir# curl 172.17.0.2:3000
+hello world docker-py !!
+
+python -m SimpleHTTPServer 8000 # using eth0
+
+
+# ----------------------------------------------------------------------------
+
+docker run -d ubuntu /bin/sh -c "while true; do echo Docker; sleep 1; done"
+docker attach
+^C
+docker start <id>
+
+# ----------------------------------------------------------------------------
+
+# docker file:  Dockerfile
+# Build an image using the Dockerfile at current location
+# Example: sudo docker build -t [instance_name] .
+# sudo docker build -t my_mongodb . 
+
+# Usage: FROM [image name]
+FROM ubuntu
+# Usage: MAINTAINER [name]
+MAINTAINER authors_name
+
+# Usage: ADD [source directory or URL] [destination directory]
+ADD /my_app_folder /my_app_folder
+
+# Usage: USER [UID] to run the container
+USER 751
+
+# Usage: VOLUME ["/dir_1", "/dir_2" ..]  access dir's on host machine
+VOLUME ["/my_files"]
+
+# Usage: RUN [command]
+RUN aptitude install -y riak
+
+# Usage: WORKDIR /path  where CMD will be executed
+WORKDIR ~/
+# Usage 1: CMD application "argument", "argument", ..
+CMD "echo" "Hello docker (from inside the container)!"
+
+# Usage: ENTRYPOINT application "argument", "argument", ..
+# Remember: arguments are optional. They can be provided by CMD
+#           or during the creation of a container. 
+# Arguments set with CMD can be overridden during *run*
+CMD "Hello docker!"
+ENTRYPOINT echo
+
+# Usage: ENV key value
+ENV SERVER_WORKS 4
+
+# Usage: EXPOSE [port]
+EXPOSE 8080
+
+# ----------------------------------------------------------------------------
+# sample docker file:  my_mongodb.docker
+
+# Set the base image to Ubuntu
+FROM ubuntu
+# File Author / Maintainer
+MAINTAINER Example McAuthor
+# Update the repository sources list
+RUN apt-get update
+
+################## BEGIN INSTALLATION ######################
+# Install MongoDB Following the Instructions at MongoDB Docs
+# Ref: http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/
+
+# Add the package verification key
+RUN apt-key adv --keyserver http://keyserver.ubuntu.com:80 --recv 7F0CEB10
+
+# Add MongoDB to the repository sources list
+RUN echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | tee /etc/apt/sources.list.d/mongodb.list
+
+# Update the repository sources list once more
+RUN apt-get update
+
+# Install MongoDB package (.deb)
+RUN apt-get install -y mongodb-10gen
+
+# Create the default data directory
+RUN mkdir -p /data/db
+##################### INSTALLATION END #####################
+
+# Expose the default port
+EXPOSE 27017
+
+# Default port to execute the entrypoint (MongoDB)
+CMD ["--port 27017"]
+# Set default container command
+ENTRYPOINT usr/bin/mongod
+
+# ----------------------------------------------------------------------------
+
+Learn how Djed Studios uses Docker containers to achieve:
+
+Efficient iterative software development
+Improved developer productivity
+Automated developer workflows
+Quicker deployments
+
+
+docker pull busybox
+docker pull ansible/ubuntu14.04-ansible
+
+[root@devenv test_docker.dir]# docker login
+Username: yeliang
+Password:
+Email: yf.liang@yahoo.ca
+Login Succeeded
+
+# ----------------------------------------------------------------------------
+
+Kitematic / DOCKER CLI
+
+docker info
+docker images
+
+docker -it run <container>
+
+docker pull <img>
+
+hub.docker.com yeliang yf.liang@yahoo.ca a2ar
+
+docker run -d --name web1 -p 8081:80 tutum/hello-world
+docker run -d --name web2 -p 8082:80 tutum/hello-world
+docker run -d --name web3 -p 8083:80 tutum/hello-world
+
+# ----------------------------------------------------------------------------
+
