@@ -1,0 +1,45 @@
+bpl / learning ansible
+
+# python
+
+pip list ; pip show <pkg> ; pip --help
+
+ansible --version
+
+config files:
+ANSIBLE_CONFIG
+./ansible.cfg
+~/.ansible.cfg
+/etc/ansible/ansible.cfg
+
+
+hostfile          = /etc/ansible/hosts
+library           = /usr/share/ansible
+forks             = 5
+sudo_user         = root
+remote_port       = 22
+host_key_checking = False
+timeout           = 60
+log_path          = /var/log/ansible.log
+
+apt list | grep ansible
+# apt show ansible/trusty
+
+apt install tree -y
+root@yeliang-Inspiron-3542:~/projects/ubuntu# tree
+.
+├── test.dir
+│   ├── ansible.cfg
+│   ├── files
+│   │   ├── nginx.crt
+│   │   └── nginx.key
+│   ├── hosts
+│   ├── templates
+│   │   ├── index.html.j2
+│   │   └── nginx.conf.j2
+│   └── web-tls.yml
+├── Vagrantfile
+├── Vagrantfile.20150831
+├── Vagrantfile.20150901
+└── Vagrantfile.20150902
+

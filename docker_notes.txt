@@ -1,13 +1,24 @@
 
 # ----------------------------------------------------------------------------
 
+root@yeliang-Inspiron-3542:~# docker pull centos:6
+root@yeliang-Inspiron-3542:~# docker pull centos:6.6 # yum -y update ; yum clean all
+
+# docker run -it --name svr1 busybox
+# docker run -it --name svr1 centos:6
+
+root@yeliang-Inspiron-3542:~# docker run -it --name svr1 centos:6.6 bin/bash
+[root@1d207e5c446d /]# yum update -y
+
 cd projects/test_docker.dir
 docker run -it --name svr1 <img> bin/bash
 ^P^Q
 docker attach svr1
 docker commit svr1 ubuntu-nginx
+docker ps
 docker stop svr1
 docker rm   svr1
+docker rmi  <image>
 
 docker pull busybox
 docker pull ansible/ubuntu14.04-ansible
