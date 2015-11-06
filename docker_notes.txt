@@ -1,5 +1,169 @@
 
 # ----------------------------------------------------------------------------
+cd /home/projects/ans_docker.dir/proj1.dir
+# docker run -it --name svr4 -p 2224:22 -p 8004:80 ubuntu_ansnode
+# service ssh  start     # ubuntu
+# ^P^Q
+ssh-keygen -f "/root/.ssh/known_hosts" -R [127.0.0.1]:2224
+ssh -l yeliang -p 2224 127.0.0.1 -oStrictHostKeyChecking=no   hostname
+ssh -l yeliang -p 2224 127.0.0.1  hostname
+
+# cat hosts
+test4  ansible_ssh_host=127.0.0.1  ansible_ssh_port=2224  ansible_ssh_user=yeliang
+
+# ansible-playbook web-notls.yml -i hosts
+http://localhost:8004/
+
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+
+# ----------------------------------------------------------------------------
+## docker run -it --name svr1 centos:6.6 bin/bash
+## docker run -d --name svr1a -p 8081:8000 ubuntu-nginx2 /bin/bash
+
+# docker run -it --name svr2 -p 2222:22 centos6_ansnode
+# docker run -it --name svr3 -p 2223:22 centos6_ansnode
+# docker run -it --name svr4 -p 2224:22 ubuntu_ansnode 
+# docker run -it --name svr5 -p 2225:22 ubuntu_ansnode 
+
+# service sshd start     # centos6
+# service ssh  start     # ubuntu
+
+# ^P^Q
+
+ssh-keygen -f "/root/.ssh/known_hosts" -R [127.0.0.1]:2222
+ssh -l yeliang -p 2224 127.0.0.1 -oStrictHostKeyChecking=no   hostname
+ssh -l yeliang -p 2224 127.0.0.1  date
+
+echo "yeliang    ALL=NOPASSWD: ALL" >> /etc/sudoers
+# ----------------------------------------------------------------------------
+# clean-up:
+
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+## !! CAREFUL: docker rmi $(docker images -a -q) !!##
+# ----------------------------------------------------------------------------
+
+root@yeliang-Inspiron-3542:~# telnet 127.0.0.1 2222
+Trying 127.0.0.1...
+Connected to 127.0.0.1.
+Escape character is '^]'.
+Connection closed by foreign host.
+
+root@yeliang-Inspiron-3542:~# telnet 127.0.0.1 2223
+Trying 127.0.0.1...
+telnet: Unable to connect to remote host: Connection refused
+
+# useradd yeliang
+# echo "yeliang    ALL=NOPASSWD: ALL" >> /etc/sudoers
+
+# ----------------------------------------------------------------------------
+DO NOT use dash(es) in image name; it might confuse docker and generate error:
+
+# do to a temp name, then use full name
+# 
+# root@yeliang-Inspiron-3542:~/projects/ans_jenkins.dir/ansible-jenkins-example/test.dir
+
+# docker build -t testme .
+# docker build -t jenkins-ansible .
+# docker build -t=myimage --rm=true .
+
+# ----------------------------------------------------------------------------
+# puppet:
+
+# ----------------------------------------------------------------------------
+# docker run -it --name test1 centos
+
+^P^Q
+docker attach test1
+
+
+# export POSTGRES_USER=mezzanine
+# export POSTGRES_PASSWORD=password
+# docker run --name test1 --publish-all=True  postgres:9.4
+
+root@yeliang-Inspiron-3542:~/projects/mezzanine# ps -ef | grep dock
+....
+root      7077  1725  0 11:03 ?        00:00:00 docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 32768 -container-ip 172.17.0.1 -container-port 5432
+....
+
+# ----------------------------------------------------------------------------
+
+# docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=mysecretpassword -d mysql
+e0b3e09b64149bf0b90333de4576457b361ce3131ce1f6030e63d9ebef7a8948
+# docker run --name some-wordpress --link some-mysql:mysql -d -p 80 wordpress
+1d3fdb1e58152f364ad14428f9b99876f7f9949252d787680651520c6791e973
+
+# docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                   NAMES
+1d3fdb1e5815        wordpress           "/entrypoint.sh apach"   29 seconds ago      Up 28 seconds       0.0.0.0:32768->80/tcp   some-wordpress
+e0b3e09b6414        mysql               "/entrypoint.sh mysql"   44 seconds ago      Up 44 seconds       3306/tcp                some-mysql
+
+root@yeliang-Inspiron-3542:~# docker port some-wordpress 80
+0.0.0.0:32768
+
+http://localhost:32768
+
+root@yeliang-Inspiron-3542:~/projects/wp.dir/wordpress-master/apache# wget https://github.com/docker-library/wordpress/archive/master.zip
+root@yeliang-Inspiron-3542:~/projects/wp.dir/wordpress-master/apache# docker build -t mod-wp .
+
+# ----------------------------------------------------------------------------
+
+yum groupinstall "Development tools"
+yum install wget -y
+wget http://www.gtlib.gatech.edu/pub/apache/zookeeper/stable/zookeeper-3.4.6.tar.gz
+
+yum install -y zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel
+
+
+# https://github.com/h2oai/h2o-2/wiki/Installing-python-2.7-on-centos-6.3.-Follow-this-sequence-exactly-for-centos-machine-only
+yum install tar which -y
+
+cd /opt
+wget --no-check-certificate https://www.python.org/ftp/python/2.7.6/Python-2.7.6.tar.xz
+tar xf Python-2.7.6.tar.xz
+cd Python-2.7.6
+./configure --prefix=/usr/local
+make && make altinstall
+
+ln -s /usr/local/bin/python2.7 /usr/local/bin/python
+
+$ tar -C /usr/share -zxf zookeeper-3.4.6.tar.gz
+$ cd /usr/share/zookeeper-3.4.6/
+$ export ZK_HOME=/usr/share/zookeeper-3.4.6
+
+$ cat conf/zoo.cfg
+tickTime=2000
+dataDir=/var/lib/zookeeper
+clientPort=2181
+
+[root@5c4e207702cc bin]# zkServer.sh status
+JMX enabled by default
+Using config: /usr/share/zookeeper-3.4.6/bin/../conf/zoo.cfg
+Mode: standalone
+
+
+# ----------------------------------------------------------------------------
+
+# docker cp svr1:/etc ./svr1_etc
+
+root@yeliang-Inspiron-3542:~/projects/wp.dir# docker run -d --name test-wp wordpress
+Unable to find image 'wordpress:latest' locally
+Pulling repository docker.io/library/wordpress
+
+root@yeliang-Inspiron-3542:~/projects/wp.dir# docker run -d --name test-mysql -e MYSQL_ROOT_PASSWORD=mysecretpassword mysql
+Unable to find image 'mysql:latest' locally
+latest: Pulling from library/mysql
+
+
+root@yeliang-Inspiron-3542:~/projects/wp.dir# docker run -it --name svr1 centos6updated
+[root@88fbaf8b29a9 /]# ^C
+[root@88fbaf8b29a9 /]# root@yeliang-Inspiron-3542:~/projects/wp.dir# docker inspect svr1 | grep IPAddress
+        "IPAddress": "172.17.0.4",
+        "SecondaryIPAddresses": null,
+
+
+# ----------------------------------------------------------------------------
 
 root@yeliang-Inspiron-3542:~# docker pull centos:6
 root@yeliang-Inspiron-3542:~# docker pull centos:6.6 # yum -y update ; yum clean all

@@ -1,0 +1,18 @@
+root@yeliang-Inspiron-3542:/home/projects/0samples.dir/ansible-examples/lamp_simple# tree -d .
+.
+├── group_vars
+└── roles
+    ├── common
+    │   ├── handlers
+    │   ├── tasks
+    │   └── templates
+    ├── db
+    │   ├── handlers
+    │   ├── tasks
+    │   └── templates
+    └── web
+        ├── handlers
+        ├── tasks
+        └── templates
+
+

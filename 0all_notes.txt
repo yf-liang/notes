@@ -43,3 +43,83 @@ root@yeliang-Inspiron-3542:~/projects/ubuntu# tree
 ├── Vagrantfile.20150901
 └── Vagrantfile.20150902
 
+# security
+yeliang@yeliang-Inspiron-3542:~$ openssl req -x509 -key ~/.ssh/id_rsa -nodes -days 365 -newkey rsa:2048 -out ~/.ssh/ssh_key.pem
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:CA
+State or Province Name (full name) [Some-State]:BC
+Locality Name (eg, city) []:
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:Devisor Consulting
+Organizational Unit Name (eg, section) []:
+Common Name (e.g. server FQDN or YOUR name) []:
+Email Address []:yf.liang@yahoo.ca
+yeliang@yeliang-Inspiron-3542:~$ ls .ssh
+id_rsa  id_rsa.pub  id_rsa.pub_inspiron_yeliang  ssh_key.pem
+yeliang@yeliang-Inspiron-3542:~$ cd .ss
+bash: cd: .ss: No such file or directory
+yeliang@yeliang-Inspiron-3542:~$ cp ssh_key.pem ssh_key_inspiron_yeliang.pem
+
+# --------------------------------------------------------------------------
+
+yeliang@yeliang-Inspiron-3542:~$ ssh -l atest2 atest2.cloudapp.net
+The authenticity of host 'atest2.cloudapp.net (40.124.53.252)' can't be established.
+ECDSA key fingerprint is fe:9c:61:d1:47:55:29:f4:e4:39:e5:e4:6f:a0:17:14.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'atest2.cloudapp.net,40.124.53.252' (ECDSA) to the list of known hosts.
+SUSE Linux Enterprise Server 11 SP4 x86_64 (64-bit)
+
+As "root" (sudo or sudo -i) use the:
+  - zypper command for package management
+  - yast command for configuration management
+
+Management and Config: https://www.suse.com/suse-in-the-cloud-basics
+Documentation: http://www.suse.com/documentation/sles11/
+Forum: https://forums.suse.com/forumdisplay.php?93-SUSE-Public-Cloud
+
+Have a lot of fun!
+atest2@atest2:~> 
+
+# --------------------------------------------------------------------------
+atest2:~ # zypper install apache2
+
+
+# --------------------------------------------------------------------------
+yeliang@yeliang-Inspiron-3542:~$ ssh -l atest33 atest33.cloudapp.net
+The authenticity of host 'atest33.cloudapp.net (104.44.133.155)' can't be established.
+RSA key fingerprint is 4a:e3:3b:5e:15:f1:7f:56:6c:6d:c9:c1:9a:97:81:be.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'atest33.cloudapp.net,104.44.133.155' (RSA) to the list of known hosts.
+[atest33@atest33 ~]$ 
+
+[root@atest33 home]#  groupadd -g 1010 xymon
+[root@atest33 home]#  useradd  -u 1010 -g xymon -M xymon
+[root@atest33 home]# 
+
+# yum -y install httpd.x86_64  rrdtool
+
+[root@atest33 home]# cp xymon/server/etc/xymon-apache.conf /etc/httpd/conf.d
+[root@atest33 home]# service apache start
+apache: unrecognized service
+[root@atest33 home]# service httpd start
+Starting httpd: httpd: Could not reliably determine the server's fully qualified domain name, using 100.77.154.28 for ServerName
+                                                           [  OK  ]
+[root@atest33 ~]# mkdir /var/log/xymon
+[root@atest33 ~]# set -o vi
+[root@atest33 ~]# chown xymon:xymon /var/log/xymon
+
+
+[xymon@atest33 etc]$ service httpd start
+Starting httpd: httpd: Could not reliably determine the server's fully qualified domain name, using 100.77.154.28 for ServerName
+(13)Permission denied: make_sock: could not bind to address [::]:80
+(13)Permission denied: make_sock: could not bind to address 0.0.0.0:80
+no listening sockets available, shutting down
+Unable to open logs
+                                                           [FAILED]
+
+# --------------------------------------------------------------------------

@@ -1,5 +1,107 @@
+# ----------------------------------------------------------------------------
+# ubuntu 14.04 LTS
+
+root@yeliang-Inspiron-3542:~# update-rc.d nginx disable
+update-rc.d: warning:  start runlevel arguments (none) do not match nginx Default-Start values (2 3 4 5)
+update-rc.d: warning:  stop runlevel arguments (none) do not match nginx Default-Stop values (0 1 6)
+
+# ----------------------------------------------------------------------------
+apt-get -y install apache2 # 
+a2enmod rewrite
+a2enmod authz_groupfile
+service apache2 restart
+
+# /etc/apache2/conf.d/xymon
+    Allow from all
+
+/var/www/html
+# vi /etc/apache2/apache2.conf
+ServerName  localhost
+
+apt-get -y install xymon # 
+config xymon server 127.0.0.1
+/usr/lib/xymon:
+cgi-bin  cgi-secure  client  server
+service xymon restart
+
+tz=PST8PDT
+sudo cp -vf /usr/share/zoneinfo/$tz /etc/localtime
+echo $tz | sudo tee /etc/timezone
+
+remove from apache2.conf
+<Directory />
+<Directory /var/www/>
+        # Require all denied
+
+# ----------------------------------------------------------------------------
+# vi /etc/nginx/sites-enabled/default
+apt-get install nginx  # starts by default
+service --status-all   # http://localhost
+
+/usr/share/nginx/html/index.html
+
+apt-get install xymon
+config xymon server 127.0.0.1
+
+/usr/lib/xymon:
+cgi-bin  cgi-secure  client  server
+
+# vi /etc/nginx/sites-enabled/default
+# vi /usr/lib/xymon/server/etc/xymonserver.cfg
+# vi /usr/lib/xymon/cgi-bin/
+/etc/php5/fpm/pool.d/www.conf
+security.limit_extensions = .pl .sh .php .php3 .php4 .php5
+# nginx -s reload
+# service php5-fpm restart
+
+# ----------------------------------------------------------------------------
+
+root@yeliang-Inspiron-3542:/usr/lib/xymon/cgi-bin# namei -om /usr/lib/xymon/cgi-bin
+f: /usr/lib/xymon/cgi-bin
+ drwxr-xr-x root root /
+ drwxr-xr-x root root usr
+ drwxr-xr-x root root lib
+ drwxr-xr-x root root xymon
+ drwxr-xr-x root root cgi-bin
+
+# ----------------------------------------------------------------------------
+# find sfw
+
+apt-cache search <keyword>
+# list all sfw
+apt-cache search .
+
+# list install pkg
+dpkg -l | grep ansible
+apt-cache showpkg ansible
+
+pip install ansible
+pip show ansible
+ls /usr/local/lib/python2.7/dist-packages/ansible
+# pip install --upgrade ansible
 
 
+# useradd -md /home/yeliang yeliang
+# echo "yeliang:ye1234" | chpasswd
+
+# ssh-keygen -b 2048 -t rsa
+# ssh -l yeliang -p 2222 127.0.0.1  date
+# ssh-copy-id -i /root/.ssh/id_rsa -p 2222 yeliang@127.0.0.1
+
+# apt-get install openssh-server
+root@6713ea46b15e:/# service ssh status
+ * sshd is not running
+root@6713ea46b15e:/# service ssh start
+ * Starting OpenBSD Secure Shell server sshd                                                   [ OK ] 
+
+
+yum search proxy
+# yum -y install openssh-server openssh-clients
+# yum -y install sudo
+# chkconfig sshd on
+# service sshd start
+
+# ----------------------------------------------------------------------------
 # ~/.profile
 set -o vi
 alias cdu="cd ~/projects/ubuntu"

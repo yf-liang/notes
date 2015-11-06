@@ -2,10 +2,38 @@ sudo su -
 cd projects/ubuntu
 vagrant up
 
-
 ansible host
 
 ansible nodes : vagrant targets
+
+# ----------------------------------------------------------------------------
+# install downloaded .deb file from virtualbox.org:
+# dpkg -i /home/yeliang/Downloads/virtualbox-5.0_5.0.6-103037-Ubuntu-trusty_amd64.deb
+
+# if vagrant not working after upgrading os, and purge and re-install from
+# .deb file
+apt-get purge virtualbox
+
+# ----------------------------------------------------------------------------
+Vagrant.configure(2) do |config|
+  config.vm.box = "npalm/mint17-amd64-cinnamon"
+
+  config.vm.provider "virtualbox" do |vb|
+    # Display the VirtualBox GUI when booting the machine
+    vb.gui = true
+
+  #   # Customize the amount of memory on the VM:
+  #   vb.memory = "1024"
+  end
+end
+
+
+root@yeliang-Inspiron-3542:~/projects/elementary# vagrant box list
+alexgleason/elementaryos-freya64 (virtualbox, 1.0.0)
+hp-ess/docker                    (virtualbox, 1.0.8)
+npalm/mint17-amd64-cinnamon      (virtualbox, 2015.09.28)
+ubuntu/trusty64                  (virtualbox, 20150902.0.2)
+ubuntu_docker                    (virtualbox, 0)
 
 # ----------------------------------------------------------------------------
 bios enable hdw virutalization
@@ -34,9 +62,6 @@ remote_user = vagrant
 # private_key_file = /root/projects/ubuntu/.vagrant.d/insecure_private_key
 private_key_file = /root/projects/ubuntu/.vagrant/machines/default/virtualbox/private_key
 host_key_checking = False
-
-# ----------------------------------------------------------------------------
-
 
 # ----------------------------------------------------------------------------
 root@vagrant:~/projects/test_py.dir# python -m SimpleHTTPServer 3000
@@ -186,5 +211,4 @@ https://atlas.hashicorp.com/
 
 google search:  vagrant plug-in
 https://github.com/mitchellh/vagrant/wiki/Available-Vagrant-Plugins
-
 
