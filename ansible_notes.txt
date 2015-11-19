@@ -1,5 +1,21 @@
 
 # ----------------------------------------------------------------------------
+
+# vi /etc/ansible/ansible.cfg
+
+
+[defaults]
+log_path = ./ansible.log
+
+# ----------------------------------------------------------------------------
+root@yeliang-Inspiron-3542:/home/projects/ans_docker.dir
+# ansible-playbook --check -i hosts update_ssh.yml
+
+[bgroup]
+test2  ansible_ssh_host=127.0.0.1  ansible_ssh_port=2222  ansible_ssh_user=yeliang
+test3  ansible_ssh_host=127.0.0.1  ansible_ssh_port=2223  ansible_ssh_user=yeliang
+
+# ----------------------------------------------------------------------------
 # use ubuntu software centre to install all packages (eg. dependency checks)
 
 sudo su - 

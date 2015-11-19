@@ -18,6 +18,10 @@ docker stop $(docker ps -a -q)
 docker rm $(docker ps -a -q)
 
 # ----------------------------------------------------------------------------
+# docker run -it --name test1 microsoft/azure-cli
+
+# ----------------------------------------------------------------------------
+
 ## docker run -it --name svr1 centos:6.6 bin/bash
 ## docker run -d --name svr1a -p 8081:8000 ubuntu-nginx2 /bin/bash
 

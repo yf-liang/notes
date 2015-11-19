@@ -121,5 +121,6 @@ Starting httpd: httpd: Could not reliably determine the server's fully qualified
 no listening sockets available, shutting down
 Unable to open logs
                                                            [FAILED]
+http://atest33.cloudapp.net
 
 # --------------------------------------------------------------------------
